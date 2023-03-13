@@ -26,6 +26,7 @@ public class BigMatrix
 	public void setValue(int row, int col, int value)
 	{
 		if(value == 0 && getValue(row, col) == 0) return;
+		
 	}
 	
 	public int getValue(int row, int col)
@@ -141,11 +142,27 @@ public class BigMatrix
 	
 	public BigMatrix multiplyByConstant(int constant)
 	{
-		throw new UnsupportedOperationException();
+		BigMatrix temp = new BigMatrix();
+		for(int i : rows.keySet())
+		{
+			for(int j : rows.get(i).keySet())
+			{
+				temp.setValue(i, j, rows.get(i).get(j) * constant);
+			}
+		}
+		return temp;
 	}
 	
 	public BigMatrix addMatrix(BigMatrix other)
 	{
-		throw new UnsupportedOperationException();
+		BigMatrix temp = new BigMatrix();
+		for(int i : rows.keySet())
+		{
+			for(int j : rows.get(i).keySet())
+			{
+				temp.setValue(i, j, rows.get(i).get(j) + other.getValue(i, j));
+			}
+		}
+		return temp;
 	}
 }
