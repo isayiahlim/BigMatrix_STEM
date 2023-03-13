@@ -42,11 +42,11 @@ public class BigMatrix
 		for(int i : rows.keySet())
 		{
 			HashMap<Integer, Integer> temp = rows.get(i);
-			Boolean t = true;
+			Boolean t = false;
 			for(int a : temp.keySet())
 			{
 				if(temp.get(a) != 0)
-					t = false;
+					t = true;
 			}
 			if(t)
 			{
@@ -67,11 +67,11 @@ public class BigMatrix
 		for(int i : columns.keySet())
 		{
 			HashMap<Integer, Integer> temp = columns.get(i);
-			Boolean t = true;
+			Boolean t = false;
 			for(int a : temp.keySet())
 			{
 				if(temp.get(a) != 0)
-					t = false;
+					t = true;
 			}
 			if(t)
 			{
