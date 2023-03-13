@@ -58,7 +58,15 @@ public class BigMatrix
 	
 	public List<Integer> getNonEmptyRowsInColumn(int col)
 	{
-		throw new UnsupportedOperationException();
+		List<Integer> nRows = new ArrayList<Integer>();
+		HashMap<Integer, Integer> colTemp = columns.get(col);
+		for(int i : colTemp.keySet())
+		{
+			int temp = colTemp.get(i);
+			if(temp != 0)
+				nRows.add(temp);
+		}
+		return nRows;
 	}
 	
 	public List<Integer> getNonEmptyCols()
@@ -83,22 +91,52 @@ public class BigMatrix
 	
 	public List<Integer> getNonEmptyColsInRow(int row)
 	{
-		throw new UnsupportedOperationException();
+		List<Integer> nCols = new ArrayList<Integer>();
+		HashMap<Integer, Integer> rowTemp = rows.get(row);
+		for(int i : rowTemp.keySet())
+		{
+			int temp = rowTemp.get(i);
+			if(temp != 0)
+				nCols.add(temp);
+		}
+		return nCols;
 	}
 	
 	public int getRowSum(int row)
 	{
-		throw new UnsupportedOperationException();
+		int sum = 0;
+		HashMap<Integer, Integer> rowTemp = rows.get(row);
+		for(int i : rowTemp.keySet())
+		{
+			sum += rowTemp.get(i);
+		}
+		return sum;
 	}
 	
 	public int getColSum(int col)
 	{
-		throw new UnsupportedOperationException();
+		int sum = 0;
+		HashMap<Integer, Integer> colTemp = columns.get(col);
+		for(int i : colTemp.keySet())
+		{
+			sum += colTemp.get(i);
+		}
+		return sum;
 	}
 	
 	public int getTotalSum()
 	{
-		throw new UnsupportedOperationException();
+		int sum = 0;
+		HashMap<Integer, Integer> colTemp = columns.get(col);
+		for(int i : rows.keySet())
+		{
+			HashMap<Integer, Integer> temp = rows.get(i);
+			for(int a : temp.keySet())
+			{
+				sum += temp.get(a);
+			}
+		}
+		return sum;
 	}
 	
 	public BigMatrix multiplyByConstant(int constant)
