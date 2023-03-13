@@ -1,3 +1,12 @@
+/*
+ * Isayiah Lim
+ * 3/13/2023
+ * Data Structures Period 1
+ * Mrs. Kankelborg
+ * BigMatrix Project
+ * This data structure stores values in a 2-dimentional matrix, increasing/decreasing
+ * in size to fit according to the storage needs of each value.
+ */
 import java.util.List;
 
 public class BigMatrix 
