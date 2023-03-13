@@ -7,10 +7,14 @@
  * This data structure stores values in a 2-dimentional matrix, increasing/decreasing
  * in size to fit according to the storage needs of each value.
  */
+import java.util.HashMap;
 import java.util.List;
 
 public class BigMatrix 
 {
+	private HashMap<Integer, HashMap<Integer>> rows;
+	private HashMap<Integer, HashMap<Integer>> columns;
+	
 	public BigMatrix()
 	{
 		throw new UnsupportedOperationException();
