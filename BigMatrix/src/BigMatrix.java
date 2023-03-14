@@ -9,7 +9,6 @@
  */
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 public class BigMatrix 
@@ -30,6 +29,30 @@ public class BigMatrix
 		{
 			rows.get(row).put(col, value);
 			columns.get(col).put(row, value);
+		}
+		else
+		{
+			if(rows.containsKey(row))
+			{
+				HashMap<Integer, Integer> newCol = new HashMap<Integer, Integer>();
+				columns.put(col, newCol);
+				rows.get(row).put(row, value);
+			}
+			if(columns.containsKey(col))
+			{
+				HashMap<Integer, Integer> newRow = new HashMap<Integer, Integer>();
+				rows.put(col, newRow);
+				columns.get(col).put(col, value);
+			}
+			else
+			{
+				HashMap<Integer, Integer> newRow = new HashMap<Integer, Integer>();
+				rows.put(col, newRow);
+				columns.get(col).put(col, value);
+				HashMap<Integer, Integer> newCol = new HashMap<Integer, Integer>();
+				columns.put(col, newCol);
+				rows.get(row).put(row, value);
+			}
 		}
 
 	}
