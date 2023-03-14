@@ -35,23 +35,23 @@ public class BigMatrix
 			if(rows.containsKey(row))
 			{
 				HashMap<Integer, Integer> newCol = new HashMap<Integer, Integer>();
+				newCol.put(row, value);
 				columns.put(col, newCol);
-				rows.get(row).put(row, value);
 			}
 			if(columns.containsKey(col))
 			{
 				HashMap<Integer, Integer> newRow = new HashMap<Integer, Integer>();
+				newRow.put(col, value);
 				rows.put(col, newRow);
-				columns.get(col).put(col, value);
 			}
 			else
 			{
 				HashMap<Integer, Integer> newRow = new HashMap<Integer, Integer>();
-				rows.put(col, newRow);
-				columns.get(col).put(col, value);
+				newRow.put(col, value);
+				rows.put(row, newRow);
 				HashMap<Integer, Integer> newCol = new HashMap<Integer, Integer>();
+				newCol.put(row, value);
 				columns.put(col, newCol);
-				rows.get(row).put(row, value);
 			}
 		}
 
