@@ -25,8 +25,13 @@ public class BigMatrix
 	
 	public void setValue(int row, int col, int value)
 	{
-		if(value == 0 && getValue(row, col) == 0) return;
-		
+		if(value == 0) return;
+		if(rows.containsKey(row) && columns.containsKey(col))
+		{
+			rows.get(row).put(col, value);
+			columns.get(col).put(row, value);
+		}
+
 	}
 	
 	public int getValue(int row, int col)
@@ -128,7 +133,6 @@ public class BigMatrix
 	public int getTotalSum()
 	{
 		int sum = 0;
-		HashMap<Integer, Integer> colTemp = columns.get(col);
 		for(int i : rows.keySet())
 		{
 			HashMap<Integer, Integer> temp = rows.get(i);
