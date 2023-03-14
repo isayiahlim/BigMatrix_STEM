@@ -222,7 +222,7 @@ public class BigMatrix
 	}
 	
 	
-	//Adds one matrix to current matrix and returns resulting matriz
+	//Adds one matrix to current matrix and returns resulting matrix
 	public BigMatrix addMatrix(BigMatrix other)
 	{
 		BigMatrix temp = new BigMatrix();
@@ -232,7 +232,7 @@ public class BigMatrix
 			for(int j : rows.get(i).keySet())
 			{
 				//adds the sum of the two into the new bigMatrix
-				temp.setValue(i, j, rows.get(i).get(j) + other.getValue(i, j));
+				temp.setValue(i, j, getValue(i,j) + other.getValue(i, j));
 			}
 		}
 		return temp;
