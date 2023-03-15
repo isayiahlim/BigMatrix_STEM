@@ -67,6 +67,25 @@ public class BigMatrix
 			}
 		}
 
+		//sees if location needs removal
+		if(getValue(row, col) == 0)
+		{
+			if(!getNonEmptyRows().contains(row))
+			{
+				rows.remove(row);
+				columns.get(col).remove(row);
+			}
+			if(!getNonEmptyCols().contains(col))
+			{
+				columns.remove(col);
+				rows.get(row).remove(col);
+			}
+			if(getNonEmptyCols().contains(col) && getNonEmptyRows().contains(row))
+			{
+				columns.get(col).remove(row);
+				rows.get(row).remove(col);
+			}
+		}
 	}
 	
 	//returns the value at an index
