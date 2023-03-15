@@ -36,6 +36,8 @@ public class BigMatrix
 		//sees if location needs removal
 		else if(rows.containsKey(row) && columns.containsKey(col) && value == 0)
 		{
+			columns.get(col).remove(row);
+			rows.get(row).remove(col);
 			if(!getNonEmptyRows().contains(row))
 			{
 				rows.remove(row);
@@ -44,11 +46,6 @@ public class BigMatrix
 			if(!getNonEmptyCols().contains(col))
 			{
 				columns.remove(col);
-				rows.get(row).remove(col);
-			}
-			if(getNonEmptyCols().contains(col) && getNonEmptyRows().contains(row))
-			{
-				columns.get(col).remove(row);
 				rows.get(row).remove(col);
 			}
 		}
