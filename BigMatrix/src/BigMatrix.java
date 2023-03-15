@@ -4,7 +4,7 @@
  * Data Structures Period 1
  * Mrs. Kankelborg
  * BigMatrix Project
- * This data structure stores values in a 2-dimentional matrix, increasing/decreasing
+ * This data structure stores values in a 2-dimensional matrix, increasing/decreasing
  * in size to fit according to the storage needs of each value.
  */
 import java.util.ArrayList;
@@ -27,14 +27,14 @@ public class BigMatrix
 	//sets values of the matrix
 	public void setValue(int row, int col, int value)
 	{
-		if(value == 0) return;
 		
-		//if the row and column both already exist, puts in the value
+		//if the row and column both already exist, puts in the value. 
 		if(rows.containsKey(row) && columns.containsKey(col))
 		{
 			rows.get(row).put(col, value);
 			columns.get(col).put(row, value);
 		}
+		//If it doesn't, adds rows/col accordingly
 		else
 		{
 			//if the matrix only has the row, add a column to the columns & put in both
