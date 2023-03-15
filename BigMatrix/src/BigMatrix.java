@@ -27,12 +27,30 @@ public class BigMatrix
 	//sets values of the matrix
 	public void setValue(int row, int col, int value)
 	{
-		
 		//if the row and column both already exist, puts in the value. 
-		if(rows.containsKey(row) && columns.containsKey(col))
+		if(rows.containsKey(row) && columns.containsKey(col) && value != 0)
 		{
 			rows.get(row).put(col, value);
 			columns.get(col).put(row, value);
+		}
+		//sees if location needs removal
+		else if(rows.containsKey(row) && columns.containsKey(col) && value == 0)
+		{
+			if(!getNonEmptyRows().contains(row))
+			{
+				rows.remove(row);
+				columns.get(col).remove(row);
+			}
+			if(!getNonEmptyCols().contains(col))
+			{
+				columns.remove(col);
+				rows.get(row).remove(col);
+			}
+			if(getNonEmptyCols().contains(col) && getNonEmptyRows().contains(row))
+			{
+				columns.get(col).remove(row);
+				rows.get(row).remove(col);
+			}
 		}
 		//If it doesn't, adds rows/col accordingly
 		else
@@ -67,25 +85,7 @@ public class BigMatrix
 			}
 		}
 
-		//sees if location needs removal
-		if(getValue(row, col) == 0)
-		{
-			if(!getNonEmptyRows().contains(row))
-			{
-				rows.remove(row);
-				columns.get(col).remove(row);
-			}
-			if(!getNonEmptyCols().contains(col))
-			{
-				columns.remove(col);
-				rows.get(row).remove(col);
-			}
-			if(getNonEmptyCols().contains(col) && getNonEmptyRows().contains(row))
-			{
-				columns.get(col).remove(row);
-				rows.get(row).remove(col);
-			}
-		}
+		
 	}
 	
 	//returns the value at an index
