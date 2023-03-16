@@ -49,6 +49,10 @@ public class BigMatrix
 				rows.get(row).remove(col);
 			}
 		}
+		else if(value == 0)
+		{
+			return;
+		}
 		//If it doesn't, adds rows/col accordingly
 		else
 		{
