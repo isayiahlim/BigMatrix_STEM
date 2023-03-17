@@ -41,12 +41,10 @@ public class BigMatrix
 			if(!getNonEmptyRows().contains(row))
 			{
 				rows.remove(row);
-				columns.get(col).remove(row);
 			}
 			if(!getNonEmptyCols().contains(col))
 			{
 				columns.remove(col);
-				rows.get(row).remove(col);
 			}
 		}
 		else if(value == 0)
