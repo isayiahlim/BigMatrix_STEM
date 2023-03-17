@@ -54,26 +54,8 @@ public class BigMatrix
 		//If it doesn't, adds rows/col accordingly
 		else
 		{
-			//if the matrix only has the row, add a column to the columns & put in both
-			if(rows.containsKey(row))
-			{
-				HashMap<Integer, Integer> newCol = new HashMap<Integer, Integer>();
-				newCol.put(row, value);
-				columns.put(col, newCol);
-				rows.get(row).put(col, value);
-			}
-			
-			//if the matrix only has the column, add a row to the rows and put in both
-			else if(columns.containsKey(col))
-			{
-				HashMap<Integer, Integer> newRow = new HashMap<Integer, Integer>();
-				newRow.put(row, value);
-				rows.put(col, newRow);
-				columns.get(col).put(row, value);
-			}
-			
-			//if the matrix has neither, make a new row and column and add both
-			else
+			//creates a new row and column to add to the matrix
+			if(!columns.containsKey(col) && !rows.containsKey(row))
 			{
 				HashMap<Integer, Integer> newRow = new HashMap<Integer, Integer>();
 				newRow.put(col, value);
@@ -81,6 +63,22 @@ public class BigMatrix
 				HashMap<Integer, Integer> newCol = new HashMap<Integer, Integer>();
 				newCol.put(row, value);
 				columns.put(col, newCol);
+			}
+			//if the matrix only has the row, add a column to the columns & put in both
+			else if(!columns.containsKey(col))
+			{
+				HashMap<Integer, Integer> newCol = new HashMap<Integer, Integer>();
+				newCol.put(row, value);
+				columns.put(col, newCol);
+				rows.get(row).put(col, value);
+			}
+			//if the matrix only has the column, add a row to the rows and put in both
+			else if(!rows.containsKey(row))
+			{
+				HashMap<Integer, Integer> newRow = new HashMap<Integer, Integer>();
+				newRow.put(row, value);
+				rows.put(col, newRow);
+				columns.get(col).put(row, value);
 			}
 		}
 
