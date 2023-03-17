@@ -27,62 +27,52 @@ public class BigMatrix
 	//sets values of the matrix
 	public void setValue(int row, int col, int value)
 	{
-		//if the row and column both already exist, puts in the value. 
-		if(rows.containsKey(row) && columns.containsKey(col) && value != 0)
+		//removes unneeded space
+		if(value == 0)
+		{
+			//if the index exists, removes it
+			if(rows.containsKey(row) && columns.containsKey(col))
+			{
+				rows.get(row).remove(col);
+				columns.get(col).remove(row);	
+			}
+			if(rows.get(row).isEmpty())
+				rows.remove(row);
+			if(columns.get(col).isEmpty())
+				columns.remove(col);
+			return;
+		}
+		if(rows.containsKey(row) && columns.containsKey(col))
 		{
 			rows.get(row).put(col, value);
 			columns.get(col).put(row, value);
 		}
-		//sees if location needs removal
-		else if(rows.containsKey(row) && columns.containsKey(col) && value == 0)
+		//creates a new row and column to add to the matrix
+		if(!columns.containsKey(col) && !rows.containsKey(row))
 		{
-			columns.get(col).remove(row);
-			rows.get(row).remove(col);
-			if(!getNonEmptyRows().contains(row))
-			{
-				rows.remove(row);
-			}
-			if(!getNonEmptyCols().contains(col))
-			{
-				columns.remove(col);
-			}
+			HashMap<Integer, Integer> newRow = new HashMap<Integer, Integer>();
+			newRow.put(col, value);
+			rows.put(row, newRow);
+			HashMap<Integer, Integer> newCol = new HashMap<Integer, Integer>();
+			newCol.put(row, value);
+			columns.put(col, newCol);
 		}
-		else if(value == 0)
+		//if the matrix only has the row, add a column to the columns & put in both
+		else if(!columns.containsKey(col))
 		{
-			return;
+			HashMap<Integer, Integer> newCol = new HashMap<Integer, Integer>();
+			newCol.put(row, value);
+			columns.put(col, newCol);
+			rows.get(row).put(col, value);
 		}
-		//If it doesn't, adds rows/col accordingly
-		else
+		//if the matrix only has the column, add a row to the rows and put in both
+		else if(!rows.containsKey(row))
 		{
-			//creates a new row and column to add to the matrix
-			if(!columns.containsKey(col) && !rows.containsKey(row))
-			{
-				HashMap<Integer, Integer> newRow = new HashMap<Integer, Integer>();
-				newRow.put(col, value);
-				rows.put(row, newRow);
-				HashMap<Integer, Integer> newCol = new HashMap<Integer, Integer>();
-				newCol.put(row, value);
-				columns.put(col, newCol);
-			}
-			//if the matrix only has the row, add a column to the columns & put in both
-			else if(!columns.containsKey(col))
-			{
-				HashMap<Integer, Integer> newCol = new HashMap<Integer, Integer>();
-				newCol.put(row, value);
-				columns.put(col, newCol);
-				rows.get(row).put(col, value);
-			}
-			//if the matrix only has the column, add a row to the rows and put in both
-			else if(!rows.containsKey(row))
-			{
-				HashMap<Integer, Integer> newRow = new HashMap<Integer, Integer>();
-				newRow.put(row, value);
-				rows.put(col, newRow);
-				columns.get(col).put(row, value);
-			}
+			HashMap<Integer, Integer> newRow = new HashMap<Integer, Integer>();
+			newRow.put(row, value);
+			rows.put(col, newRow);
+			columns.get(col).put(row, value);
 		}
-
-		
 	}
 	
 	//returns the value at an index
@@ -226,9 +216,9 @@ public class BigMatrix
 	{
 		BigMatrix temp = new BigMatrix();
 		//for every row, for every column in that row
-		for(int i : columns.keySet())
+		for(int i : rows.keySet())
 		{
-			for(int j : columns.get(i).keySet())
+			for(int j : rows.get(i).keySet())
 			{
 				//sets the new matrix's value to the existing matrix value times constant
 				temp.setValue(i, j, getValue(i,j) * constant);
@@ -243,9 +233,9 @@ public class BigMatrix
 	{
 		BigMatrix temp = new BigMatrix();
 		//for every row, for every column in that row
-		for(int i : columns.keySet())
+		for(int i : rows.keySet())
 		{
-			for(int j : columns.get(i).keySet())
+			for(int j : rows.get(i).keySet())
 			{
 				//adds the sum of the two into the new bigMatrix
 				temp.setValue(i, j, getValue(i,j) + other.getValue(i, j));
