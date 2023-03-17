@@ -226,12 +226,12 @@ public class BigMatrix
 	{
 		BigMatrix temp = new BigMatrix();
 		//for every row, for every column in that row
-		for(int i : rows.keySet())
+		for(int i : columns.keySet())
 		{
-			for(int j : rows.get(i).keySet())
+			for(int j : columns.get(i).keySet())
 			{
 				//sets the new matrix's value to the existing matrix value times constant
-				temp.setValue(i, j, rows.get(i).get(j) * constant);
+				temp.setValue(i, j, getValue(i,j) * constant);
 			}
 		}
 		return temp;
@@ -243,9 +243,9 @@ public class BigMatrix
 	{
 		BigMatrix temp = new BigMatrix();
 		//for every row, for every column in that row
-		for(int i : rows.keySet())
+		for(int i : columns.keySet())
 		{
-			for(int j : rows.get(i).keySet())
+			for(int j : columns.get(i).keySet())
 			{
 				//adds the sum of the two into the new bigMatrix
 				temp.setValue(i, j, getValue(i,j) + other.getValue(i, j));
