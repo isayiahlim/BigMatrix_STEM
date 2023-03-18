@@ -27,51 +27,44 @@ public class BigMatrix
 	//sets values of the matrix
 	public void setValue(int row, int col, int value)
 	{
-		//removes unneeded space
+		if(value == 0 && getValue(row, col) == 0) return;
 		if(value == 0)
 		{
-			//if the index exists, removes it
-			if(rows.containsKey(row) && columns.containsKey(col))
+			if(rows.containsKey(row))
 			{
 				rows.get(row).remove(col);
-				columns.get(col).remove(row);	
+				if(rows.get(row).isEmpty()) 
+					rows.remove(row);
 			}
-			if(rows.get(row).isEmpty())
-				rows.remove(row);
-			if(columns.get(col).isEmpty())
-				columns.remove(col);
-			return;
+			if(columns.containsKey(col))
+			{
+				columns.get(col).remove(row);
+				if(columns.get(col).isEmpty()) 
+					columns.remove(col);
+			}
 		}
-		if(rows.containsKey(row) && columns.containsKey(col))
+		else
 		{
-			rows.get(row).put(col, value);
-			columns.get(col).put(row, value);
-		}
-		//creates a new row and column to add to the matrix
-		if(!columns.containsKey(col) && !rows.containsKey(row))
-		{
-			HashMap<Integer, Integer> newRow = new HashMap<Integer, Integer>();
-			newRow.put(col, value);
-			rows.put(row, newRow);
-			HashMap<Integer, Integer> newCol = new HashMap<Integer, Integer>();
-			newCol.put(row, value);
-			columns.put(col, newCol);
-		}
-		//if the matrix only has the row, add a column to the columns & put in both
-		else if(!columns.containsKey(col))
-		{
-			HashMap<Integer, Integer> newCol = new HashMap<Integer, Integer>();
-			newCol.put(row, value);
-			columns.put(col, newCol);
-			rows.get(row).put(col, value);
-		}
-		//if the matrix only has the column, add a row to the rows and put in both
-		else if(!rows.containsKey(row))
-		{
-			HashMap<Integer, Integer> newRow = new HashMap<Integer, Integer>();
-			newRow.put(row, value);
-			rows.put(col, newRow);
-			columns.get(col).put(row, value);
+			if(rows.containsKey(row))
+			{
+				rows.get(row).put(col, value);
+			}
+			else
+			{
+				HashMap<Integer, Integer> newR = new HashMap<Integer, Integer>();
+				newR.put(col, value);
+				rows.put(row, newR);
+			}
+			if(columns.containsKey(col))
+			{
+				columns.get(col).put(row, value);
+			}			
+			else
+			{
+				HashMap<Integer, Integer> newC = new HashMap<Integer, Integer>();
+				newC.put(row, value);
+				columns.put(col, newC);
+			}
 		}
 	}
 	
