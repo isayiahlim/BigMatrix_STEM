@@ -27,9 +27,12 @@ public class BigMatrix
 	//sets values of the matrix
 	public void setValue(int row, int col, int value)
 	{
+		//removes things if value is 0
 		if(value == 0 && getValue(row, col) == 0) return;
 		if(value == 0)
 		{
+			//removes individual coords, then if the row/column is completely empty, removes
+			//the whole thing
 			if(rows.containsKey(row))
 			{
 				rows.get(row).remove(col);
@@ -93,7 +96,7 @@ public class BigMatrix
 		return nRows;
 	}
 	
-	//returns a list of all the non-empty rows in a given column
+	//returns the column given (if empty, then returns empty)
 	public List<Integer> getNonEmptyRowsInColumn(int col)
 	{
 		return new ArrayList<Integer>(columns.get(col).keySet());
@@ -113,7 +116,7 @@ public class BigMatrix
 		return nCols;
 	}
 	
-	//checks non-empty columns in each row
+	//returns the row given
 	public List<Integer> getNonEmptyColsInRow(int row)
 	{
 		return new ArrayList<Integer>(rows.get(row).keySet());
@@ -196,6 +199,7 @@ public class BigMatrix
 				temp.setValue(i, j, getValue(i,j) + other.getValue(i, j));
 			}
 		}
+		//adds anything that hasn't been added yet from other
 		for(int i : other.rows.keySet())
 		{
 			for(int j : other.rows.get(i).keySet())
