@@ -45,6 +45,7 @@ public class BigMatrix
 		}
 		else
 		{
+			//adds to row, and if row doesn't exists, adds the row itself
 			if(rows.containsKey(row))
 			{
 				rows.get(row).put(col, value);
@@ -55,6 +56,7 @@ public class BigMatrix
 				newR.put(col, value);
 				rows.put(row, newR);
 			}
+			//adds to column, if column doesn't exist, adds column itself
 			if(columns.containsKey(col))
 			{
 				columns.get(col).put(row, value);
@@ -232,6 +234,16 @@ public class BigMatrix
 			{
 				//adds the sum of the two into the new bigMatrix
 				temp.setValue(i, j, getValue(i,j) + other.getValue(i, j));
+			}
+		}
+		for(int i : other.rows.keySet())
+		{
+			for(int j : other.rows.get(i).keySet())
+			{
+				if(temp.getValue(i,j) == 0)
+				{
+					temp.setValue(i, j, other.getValue(i, j));
+				}
 			}
 		}
 		return temp;
