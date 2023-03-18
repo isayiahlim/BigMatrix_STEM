@@ -125,12 +125,14 @@ public class BigMatrix
 	}
 	
 	//checks non-empty columns in each row
+	@SuppressWarnings("unchecked")
 	public List<Integer> getNonEmptyColsInRow(int row)
 	{
 		//list storing the indexes of each non-empty column
 		List<Integer> nCols = new ArrayList<Integer>();
 		if(!rows.containsKey(row) || rows.get(row).isEmpty()) return nCols;
 		HashMap<Integer, Integer> rowTemp = rows.get(row);
+		/*
 		//for every column in a row, if the value at the column isn't 0, add it to the list
 		for(int i : rowTemp.keySet())
 		{
@@ -138,6 +140,8 @@ public class BigMatrix
 			if(temp != 0)
 				nCols.add(temp);
 		}
+		*/
+		nCols = (List<Integer>) rowTemp;
 		return nCols;
 	}
 	
