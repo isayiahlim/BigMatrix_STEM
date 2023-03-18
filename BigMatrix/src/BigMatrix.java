@@ -87,17 +87,8 @@ public class BigMatrix
 		List<Integer> nRows = new ArrayList<Integer>();
 		for(int i : rows.keySet())
 		{
-			HashMap<Integer, Integer> temp = rows.get(i);
-			Boolean t = false;
-			for(int a : temp.keySet())
-			{
-				if(temp.get(a) != 0)
-					t = true;
-			}
-			if(t)
-			{
+			if(!rows.get(i).isEmpty())
 				nRows.add(i);
-			}
 		}
 		return nRows;
 	}
@@ -107,7 +98,7 @@ public class BigMatrix
 	{
 		//list to store all the rows that aren't empty
 		List<Integer> nRows = new ArrayList<Integer>();
-		if(!columns.containsKey(col)) return nRows;
+		if(!columns.containsKey(col) || columns.get(col).isEmpty()) return nRows;
 		//temp column to iterate through - for every item in column, if isn't zero, adds to list
 		HashMap<Integer, Integer> colTemp = columns.get(col);
 		for(int i : colTemp.keySet())
@@ -124,20 +115,11 @@ public class BigMatrix
 	{
 		//list of columns
 		List<Integer> nCols = new ArrayList<Integer>();
-		//for each column in columns, if any of the indexes aren't 0, add it to the list 
+		//for each column in columns, if column isn't empty it adds to the list
 		for(int i : columns.keySet())
 		{
-			HashMap<Integer, Integer> temp = columns.get(i);
-			Boolean t = false;
-			for(int a : temp.keySet())
-			{
-				if(temp.get(a) != 0)
-					t = true;
-			}
-			if(t)
-			{
+			if(!columns.get(i).isEmpty()) 
 				nCols.add(i);
-			}
 		}
 		return nCols;
 	}
@@ -147,7 +129,7 @@ public class BigMatrix
 	{
 		//list storing the indexes of each non-empty column
 		List<Integer> nCols = new ArrayList<Integer>();
-		if(!rows.containsKey(row)) return nCols;
+		if(!rows.containsKey(row) || rows.get(row).isEmpty()) return nCols;
 		HashMap<Integer, Integer> rowTemp = rows.get(row);
 		//for every column in a row, if the value at the column isn't 0, add it to the list
 		for(int i : rowTemp.keySet())
